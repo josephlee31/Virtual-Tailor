@@ -15,7 +15,7 @@ Current commercial arm braces often follow a one-size fits all approach and cust
 - Successfully able to create 3D models within an error of ± 1cm
 
 ## Future Roadmap
-- Unfortunately, there is no current, feasiable way of hosting this project for free. The Cloud Run server and FireBase cloud storage used to host the back-end and image/STL files are closed. However, the process looks like the below:
+Unfortunately, there is no current, feasiable way of hosting this project for free. The Cloud Run server and FireBase cloud storage used to host the back-end and image/STL files are closed. However, the process looks like the below:
 
 
 
