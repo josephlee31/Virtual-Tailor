@@ -3,7 +3,6 @@
 from google.cloud import storage
 import cv2 as cv
 import numpy as np
-import os
 
 # Local helper functions
 import helpers.config as config

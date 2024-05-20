@@ -4,17 +4,10 @@ from mediapipe.tasks.python import vision
 
 import cv2 as cv
 
-try:
-  base_options = python.BaseOptions(model_asset_path='assets/models/hand_landmarker.task')
-  options = vision.HandLandmarkerOptions(base_options=base_options,
-                                       num_hands=2)
-  detector = vision.HandLandmarker.create_from_options(options)
-
-except:
-  base_options = python.BaseOptions(model_asset_path='calibrace/assets/models/hand_landmarker.task')
-  options = vision.HandLandmarkerOptions(base_options=base_options,
-                                        num_hands=2)
-  detector = vision.HandLandmarker.create_from_options(options)
+base_options = python.BaseOptions(model_asset_path='assets/models/hand_landmarker.task')
+options = vision.HandLandmarkerOptions(base_options=base_options,
+                                      num_hands=2)
+detector = vision.HandLandmarker.create_from_options(options)
 
 # Return a dictionary of hand landmark coordinates and annotated image
 def obtain_landmarks(shape, img):
