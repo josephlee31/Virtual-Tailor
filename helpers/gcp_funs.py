@@ -10,7 +10,7 @@ import helpers.config as config
 # Establish GCP connection using Service Account Key.
 service_account_key = 'path_to_key'
 storage_client = storage.Client.from_service_account_json(service_account_key)
-bucket = storage_client.bucket('mediaupload-9b88f.appspot.com')
+bucket = storage_client.bucket('name_of_firebase_bucket')
 
 ####################################
 ### Function definitions
