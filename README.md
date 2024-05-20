@@ -11,7 +11,7 @@ Current commercial arm braces often follow a one-size fits all approach and cust
 ## Features
 - A 3D printed robotic arm (lovingly named "Rodney") was assembled to automate and standardize the image acquisition process.
 - Image-processing backend deployed to a Google Cloud Run server using Flask and Docker, enabling users to trigger the function and retrieve a custom brace in less than 3 minutes.
-- Successfully able to create 3D models within an error of ± 1cm
+- Successfully able to create 3D models within an error of ± 1cm.
 
 <p align="center">
   <img src="./assets/images/rodney.jpg" width="360" height="500"/>
@@ -20,8 +20,17 @@ Current commercial arm braces often follow a one-size fits all approach and cust
 ## Future Roadmap
 Unfortunately, there is no current, feasiable way of hosting this project for free. The Cloud Run server and FireBase cloud storage used to host the back-end and image/STL files are closed. However, the process looks like the below:
 
-1. Using the mobile app, the user takes a photo of the side-, back-, and front-view of the hand.
-2. 
+1. Using the mobile app, the user takes a photo of the side-, back-, and front-view of the hand. 
+2. The mobile app automatically uploads the images to a Firebase cloud database.
+3. The mobile app generates a download URL, which the user can copy-paste to their browser.
+4. The URL is similar in the format of `https://calibrace.a.run.app/?id={caseID}`. 
+5. The Cloud Run server accepts this HTTPS request, and understands which images to process using the Case ID.
+6. The Cloud Run server begins running the backend function, then triggers the user's web browser to download the completed STL file using a 302 status code.
+<br />
+
+<p align="center">
+  <img src="./assets/images/hands.png" width="376", height="234"/>
+</p>
 
 
 
