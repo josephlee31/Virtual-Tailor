@@ -68,6 +68,35 @@ Following this step, the mask must further be cropped such that Section B (Figur
   <br /><strong>Figure 7.</strong> Masked image of the wrist brace.
 </p>
 
+### Step 4. 3D Modeling
+Once the masked image of the wrist brace is generated, the image-processing pipeline starts iterating over every pixel of the image. In each iteration, the intensity of the grayscale pixel, which is the value of the pixel within the NumPy array of the image, is extracted to obtain an estimation of depth. Afterwards, the 3D coordinate for the pixel is generated, and appended to another NumPy array, named `point_cloud`:
+
+- <strong>X-coordinate</strong>: The column in which the pixel is located, within the overall image.
+- <strong>Y-coordinate</strong>: The row in which the pixel is located, within the overall image.
+- <strong>Z-coordinate</strong>: The intensity of the grayscale pixel. (pixel = img_gray[row, col])
+
+After the point_cloud NumPy array has been constructed, the image processing pipeline converts the point-cloud into a watertight mesh, using Python’s `PyVista` library. Figure 8a presents screenshots of sample meshes developed using a group member’s hand photos.
+
+<p align="center">
+  <img src="./assets/images/mesh.png"/>
+  <br /><strong>Figure 8.</strong> Sample screenshots of the front-half shell of Student A’s custom hand brace.
+</p>
+
+### Step 5. ArUco Tracking Stage
+To enhance the lateral depth estimation of the image-processing pipeline, **ArUco markers** and their pose-detection capabilities were implemented [4]. As shown in Figure 9, the medial side of the hand is facing towards the camera. Then, two 3D-printed rectangular blocks – with unique ArUco markers attached to its top face – are positioned such that the distance between the medial and lateral sides of the hand’s thenar eminence can be measured. With ArUco markers, this distance, labeled “A” in Figure 9, can be approximated in units of centimeters using OpenCV’s `cv.aruco.detectMarkers` function.
+
+<p align="center">
+  <img src="./assets/images/aruco.png"/>
+  <br /><strong>Figure 9.</strong> The distance between the lateral and medial regions of the hand can be estimated using ArUco markers. 
+</p>
+
+### Step 6. Done!
+Using the distance value calculated with the ArUco markers, the software algorithm can estimate the general shape of the custom wrist brace. An STL file is generated, which can then be used to 3D-print the brace model on any 3D printer.
+
+<p align="center">
+  <img src="./assets/images/brace.jpg" width="454", height="605"/>
+</p>
+
 ## How to Run
 Unfortunately, there is no current, feasiable way of hosting this project for free. The Cloud Run server and FireBase cloud storage used to host the back-end and image/STL files are closed. However, the process looks like the below:
 
@@ -87,4 +116,5 @@ Unfortunately, there is no current, feasiable way of hosting this project for fr
 [1] R. Jain, R. Kasturi, and B. G. Schunck, “Depth,” in Machine Vision. McGraw-Hill, 1995, ch. 11, pp. 289-308. [PDF]. Available: https://cse.usf.edu/~r1k/MachineVisionBook/MachineVision.files/MachineVision_Chapter11.pdf <br />
 [2] “More on Brightness as a Function of Distance.” NASA. https://imagine.gsfc.nasa.gov/features/yba/M31_velocity/lightcurve/more.html <br />
 [3] “Inverse square law.” Energy Education, University of Calgary. https://energyeducation.ca/encyclopedia/Inverse_square_law <br />
+[4] ArUco Marker Detection [Online]. OpenCV. Available: https://docs.opencv.org/3.4/d9/d6a/group__aruco.html. <br />
 
